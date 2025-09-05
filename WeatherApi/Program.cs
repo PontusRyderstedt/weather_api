@@ -13,20 +13,26 @@ app.MapGet("/", () => "SMHI Weather API is running 🚀");
 app.MapGet("/weather/wind", async (
     WeatherService service,
     string? station,
-    DateTime? from,
-    DateTime? to) =>
+    string? from,
+    string? to) =>
 {
-    var data = await service.GetWeatherDataAsync(ApiParameters.GustWindSpeed, station, from, to);
+    var (stationId, fromDate, toDate, error) = Utils.ParseAndValidate(station, from, to);
+    if (error != null) return error;
+
+    var data = await service.GetWeatherDataAsync(ApiParameters.GustWindSpeed, stationId, fromDate, toDate);
     return data is null ? Results.NotFound() : Results.Ok(data);
 });
 
 app.MapGet("/weather/temperature", async (
     WeatherService service,
     string? station,
-    DateTime? from,
-    DateTime? to) =>
+    string? from,
+    string? to) =>
 {
-    var data = await service.GetWeatherDataAsync(ApiParameters.AirTemperature, station, from, to);
+    var (stationId, fromDate, toDate, error) = Utils.ParseAndValidate(station, from, to);
+    if (error != null) return error;
+
+    var data = await service.GetWeatherDataAsync(ApiParameters.AirTemperature, stationId, fromDate, toDate);
     return data is null ? Results.NotFound() : Results.Ok(data);
 });
 

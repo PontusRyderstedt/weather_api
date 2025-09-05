@@ -27,6 +27,10 @@ namespace WeatherApi.Services
         {
             var url = LatestUrl(parameterId);
             var response = await httpClient.GetAsync(url);
+            if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                return null;
+            }
             response.EnsureSuccessStatusCode();
             var content = await response.Content.ReadAsStringAsync();
             var jsonData = JsonSerializer.Deserialize<SmhiStationsResponse>(content);
@@ -37,6 +41,10 @@ namespace WeatherApi.Services
         {
             var url = StationUrl(parameterId, stationId);
             var response = await httpClient.GetAsync(url);
+            if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                return null;
+            }
             response.EnsureSuccessStatusCode();
             var content = await response.Content.ReadAsStringAsync();
             var jsonData = JsonSerializer.Deserialize<SmhiSingleStationResponse>(content);
