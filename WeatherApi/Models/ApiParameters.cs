@@ -4,7 +4,7 @@ namespace WeatherApi.Models
 {
     public class ApiParameters
     {
-        public static string AirTemperature = "1";
-        public static string GustWindSpeed = "21";
+        public const string AirTemperature = "1";
+        public const string GustWindSpeed = "21";
     }
 }
