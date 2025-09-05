@@ -1,0 +1,92 @@
+{
+  "updated": 1757030400000,
+  "parameter": {
+    "key": "1",
+    "name": "Lufttemperatur",
+    "summary": "momentanvärde, 1 gång/tim",
+    "unit": "celsius"
+  },
+  "station": {
+    "key": "97280",
+    "name": "Adelsö A",
+    "owner": "SMHI",
+    "ownerCategory": "CLIMATE",
+    "measuringStations": "CORE",
+    "height": 2
+  },
+  "period": {
+    "key": "latest-months",
+    "from": 1745798401000,
+    "to": 1757055600000,
+    "summary": "Data från senaste fyra månaderna",
+    "sampling": "Ej angivet"
+  },
+  "position": [
+    {
+      "from": 817776000000,
+      "to": 1757056811000,
+      "height": 5.612,
+      "latitude": 59.3579,
+      "longitude": 17.5213
+    }
+  ],
+  "link": [
+    {
+      "href": "https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/1/station/97280/period/latest-months/data.json",
+      "rel": "data",
+      "type": "application/json"
+    },
+    {
+      "href": "https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/1/station/97280/period/latest-months/data.xml",
+      "rel": "data",
+      "type": "application/xml"
+    },
+    {
+      "href": "https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/1/station/97280/period/latest-months/data.csv",
+      "rel": "data",
+      "type": "text/plain"
+    },
+    {
+      "href": "https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/1/station/97280/period/latest-months.atom",
+      "rel": "period",
+      "type": "application/atom+xml"
+    },
+    {
+      "href": "https://opendata-catalog.smhi.se/md/25080190-38ba-4279-a65d-d9ef8d0bf949",
+      "rel": "iso19139",
+      "type": "application/vnd.iso.19139+xml"
+    },
+    {
+      "href": "https://opendata-catalog.smhi.se/md/c6ae10b6-6a18-4e15-9444-fbd746f4609d",
+      "rel": "iso19139",
+      "type": "application/vnd.iso.19139+xml"
+    }
+  ],
+  "value": [
+    {
+      "date": 1745802000000,
+      "value": "9.7",
+      "quality": "G"
+    },
+    {
+      "date": 1745805600000,
+      "value": "9.4",
+      "quality": "G"
+    },
+    {
+      "date": 1745809200000,
+      "value": "9.2",
+      "quality": "G"
+    },
+    {
+      "date": 1745812800000,
+      "value": "9.4",
+      "quality": "G"
+    },
+    {
+      "date": 1755812800000,
+      "value": "19.4",
+      "quality": "G"
+    }
+  ]
+}
