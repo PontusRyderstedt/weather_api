@@ -28,9 +28,11 @@ public class WeatherService
         if (stationId != null)
         {
             return (await client.GetStationAsync(parameterId, stationId)).ToList().Where(o =>
-                (startDate == null || o.Date >= startDate) &&
-                (endDate == null || o.Date <= endDate));
+                (startDate == null || o.Date.Date >= startDate?.Date) &&
+                (endDate == null || o.Date.Date <= endDate?.Date));
         }
+
+        // Filtering by only date range
 
         throw new NotImplementedException("Fetching historical data is not implemented yet.");
     }
