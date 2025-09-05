@@ -8,6 +8,8 @@ builder.Services.AddScoped<WeatherService>();
 
 var app = builder.Build();
 
+app.UseMiddleware<ApiKeyMiddleware>();
+
 app.MapGet("/", () => "SMHI Weather API is running 🚀");
 
 app.MapGet("/weather/wind", async (

@@ -1,39 +1,41 @@
 using WeatherApi.Models;
-using WeatherApi.Services;
 
-public class WeatherService
+namespace WeatherApi.Services
 {
-    private readonly SmhiClientWrapper client;
-
-    public WeatherService(SmhiClientWrapper client)
+    public class WeatherService
     {
-        this.client = client ?? throw new ArgumentNullException(nameof(client));
-    }
+        private readonly SmhiClientWrapper client;
 
-    public async Task<IEnumerable<ObservationDto>> GetWeatherDataAsync(string parameterId, string? stationId, DateTime? startDate, DateTime? endDate)
-    {
-        // Base call, no filtering, just get latest data for all stations
-        if (startDate == null && endDate == null && stationId == null)
+        public WeatherService(SmhiClientWrapper client)
         {
-            return (await client.GetLatestAsync(parameterId)).ToList();
+            this.client = client ?? throw new ArgumentNullException(nameof(client));
         }
 
-        // Filtering by only station
-        if (startDate == null && endDate == null && stationId != null)
+        public async Task<IEnumerable<ObservationDto>> GetWeatherDataAsync(string parameterId, string? stationId, DateTime? startDate, DateTime? endDate)
         {
-            return (await client.GetStationAsync(parameterId, stationId)).ToList();
+            // Base call, no filtering, just get latest data for all stations
+            if (startDate == null && endDate == null && stationId == null)
+            {
+                return (await client.GetLatestAsync(parameterId)).ToList();
+            }
+
+            // Filtering by only station
+            if (startDate == null && endDate == null && stationId != null)
+            {
+                return (await client.GetStationAsync(parameterId, stationId)).ToList();
+            }
+
+            // Filtering by station and date range
+            if (stationId != null)
+            {
+                return (await client.GetStationAsync(parameterId, stationId)).ToList().Where(o =>
+                    (startDate == null || o.Date.Date >= startDate?.Date) &&
+                    (endDate == null || o.Date.Date <= endDate?.Date));
+            }
+
+            // Filtering by only date range
+
+            throw new NotImplementedException("Fetching historical data is not implemented yet.");
         }
-
-        // Filtering by station and date range
-        if (stationId != null)
-        {
-            return (await client.GetStationAsync(parameterId, stationId)).ToList().Where(o =>
-                (startDate == null || o.Date.Date >= startDate?.Date) &&
-                (endDate == null || o.Date.Date <= endDate?.Date));
-        }
-
-        // Filtering by only date range
-
-        throw new NotImplementedException("Fetching historical data is not implemented yet.");
     }
 }
